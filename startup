@@ -1,0 +1,47 @@
+	
+
+    term.clear()
+    term.setCursorPos(1,1)
+    local mon = peripheral.wrap("back")
+    mon.setTextScale(3)
+     
+    term.redirect(mon)
+     
+    term.setTextColor(colors.black)
+    term.setBackgroundColor(colors.lightBlue)
+    term.clear()
+     
+    term.setCursorPos(1,2)
+    term.write("Welcome to")
+     
+    term.setBackgroundColor(colors.white)
+     
+    local w,h = mon.getSize()
+    local pos = w+1
+    local s = "UserTech Limited"
+     
+    os.pullEvent = function(e1)
+      local e2 = {os.pullEventRaw(e1)}
+      if (e2[1] == "terminate") then
+        term.setBackgroundColor(colors.black)
+        term.clear()
+        term.redirect(term.native())
+        error()
+      end
+      return unpack(e2)
+    end
+     
+    while true do
+      term.setCursorPos(pos,3)
+      term.clearLine()
+      term.write(s)
+     
+      if (pos < -#s) then
+        pos = w+1
+      else
+        pos = pos-1
+      end
+     
+      sleep(.2)
+    end
+
